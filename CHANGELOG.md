@@ -2,30 +2,51 @@
 **Features:**
 
 * **Installer:**
-  * Shelly is now the default used GUI Package Manager instead of Octopi
-  * Creates now a clean snapshot directly after the installation, which can be used as restore. This snapshot stays permamently.
-  * GRUB OS_PROPER is now default enabled
-  * UKUI Desktop has been dropped
-  * AMD GPUs use now a different plymouth theme, since the amdgpu driver on laptop and a second monitor is not capable to present more then 69 picture  * Cleanup and modernise Gnome package selection
-  * **CachyOS-Welcome:**
-  * Added support for DNS over HTTPs via blocky
-  * DNS Page now allows to latency test specific dns servers and added support for custom servers
-  * Toggle added to enable better VRAM Management on AMD and Intel dGPUs. This can be only used with gamescope or KDE.
-  * Keyboard Navigation
+  * Shelly now replaced Octopi as the GUI package manager
+  * A clean snapshot is now created immediately after installation and retained permanently, providing a baseline restore point
+  * GRUB `os-prober` is now enabled by default
+  * Added MangoWM as Desktop Option with dotfiles
+  * Dropped the UKUI desktop
+  * AMD GPUs now use a different Plymouth theme, as the amdgpu driver is unable to render the previous theme reliably on laptops with a secondary monitor attached
+  * Cleaned up and modernised the GNOME package selection
+  * Added option to install `MangoWM` with `DMS` shell
+* **CachyOS-Welcome:**
+  * Added DNS-over-HTTPS (DoH) support via `blocky`
+  * Added custom DNS server support and DHCP automatic indicator/reset
+  * DNS servers now display metadata (region, homepage, filtering) and support individual latency testing
+  * Added VRAM management toggle `dmemcg-booster` (additionally installs `plasma-foreground-booster` on KDE)
+  * Added full keyboard navigation support for accessibility
+  * Replaced PNG social icons with crisp, HiDPI-aware SVGs
+  * Added `wezterm` to the terminal helper
 * **chwd:**
-  * Added support to enable fingerprint sudo for supported devices
-  * Added support for intel-lpmd for supported device and created an own fork for better configs
-  * Chassis Type Detection in profiles
-  * Added Xbox Rog Ally pattern to chwd profile
-* **cachyos-settings:** Switched to NVMe Scheduler from none to kyber 
+  * Added native USB device detection (via libusb/sysfs) and chassis type detection
+  * Added support for fingerprint (`fprint`) sudo integration
+  * Added CPU family/model detection to support `intel-lpmd`
+  * **Handhelds:** Added exact patterns for Xbox ROG Ally
+  * **Network:** Added Marvell AVASTAR 88W8897 Wi-Fi profile (Surface Pro 4)
+  * Split NVIDIA profiles for laptops and desktop environments
+  * Split and updated profiles for Virtual Machines
+* **cachyos-settings:** Switched the default NVMe I/O scheduler from `none` to `kyber`
 
 **Fixes:**
 
 * **Installer:**
-  * Print partition method into debug log
-  * Remove old microcode if reusing boot partition
+  * The partition method is now printed to the debug log
+  * Old microcode packages are now removed when reusing an existing boot partition
 * **CachyOS-Welcome:**
-  * 
+  * Fixed connectivity checks incorrectly returning true when ping fails
+  * Ensured external link icons are visible in dark themes
+  * Prevented multiple instances of the welcome app from launching simultaneously
+  * Added `StartupWMClass` for improved `.desktop` window matching
+* **chwd:**
+  * Removed the `kms` hook from `mkinitcpio.conf` on non-portable desktops to fix NVIDIA driver conflicts
+  * Made the installed kernel search in NVIDIA profiles more accurate
+  * Removed forced Xorg session from the NVIDIA 470xx profiles (fixes compatibility with `plasma-login-manager`)
+  * Removed outdated `WaylandEnable=false` for GDM in Virtual Machine profiles
+  * Fixed false-positive handheld detections (e.g., specific MSI laptops being mistaken for the MSI Claw)
+* **cachyos-settings:**
+  * Dropped `S01x` power management due to issues with the NVIDIA 595 driver
+  * Disabled `AggressiveVblank` due to VR-related issues with the NVIDIA driver
 
 * **chwd:**
   * Kernel search is now more accurate in nvidia profiles
