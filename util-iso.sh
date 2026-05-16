@@ -81,7 +81,7 @@ EOF
 
 fetch_cachyos_mirrorlist() {
     mkdir -p ${src_dir}/archiso/airootfs/etc/pacman.d
-    local _mirrorlist_url="https://github.com/CachyOS/CachyOS-PKGBUILDS/raw/master/cachyos-mirrorlist/cachyos-mirrorlist"
+    local _mirrorlist_url="https://github.com/mgiustiniani/CachyOS-PKGBUILDS/raw/master/cachyos-mirrorlist/cachyos-mirrorlist"
 
     curl -sSL "${_mirrorlist_url}" > ${src_dir}/archiso/airootfs/etc/pacman.d/cachyos-mirrorlist
 }
