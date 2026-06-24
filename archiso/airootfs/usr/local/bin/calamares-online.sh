@@ -32,7 +32,10 @@ main() {
     local ISO_VERSION="$(cat /etc/version-tag)"
     echo "USING ISO VERSION: ${ISO_VERSION}"
 
-    sudo pacman -Sy --noconfirm synapse-calamares
+    # synapse-calamares è già preinstallato nell'ISO, salta se presente
+    if ! pacman -Qi synapse-calamares &>/dev/null; then
+        sudo pacman -Sy --noconfirm synapse-calamares
+    fi
 
     # Get Hardware Informations
     inxi -F > "$log"
@@ -44,7 +47,7 @@ main() {
 ########## System: $SYSTEM
 EOF
 
-    sudo cp "/usr/share/calamares/settings_${mode}.conf" /etc/calamares/settings.conf
+    sudo cp "/usr/share/calamares/settings_${mode}.conf" /etc/calamares/settings.conf 2>/dev/null || true
     exec pkexec-wrapper calamares -D6 >> $log
 }
 
