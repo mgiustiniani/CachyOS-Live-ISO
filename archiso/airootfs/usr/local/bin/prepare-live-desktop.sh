@@ -1,11 +1,6 @@
 #!/bin/sh
 # borrowed from manjaro livecd
 
-# Install Structurizr WAR file if available in packages
-if command -v install-structurizr.sh &>/dev/null; then
-    install-structurizr.sh
-fi
-
 xdg=$(xdg-user-dir DESKTOP)
 src='/usr/share/applications'
 
